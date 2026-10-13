@@ -18,3 +18,4 @@ jobs:
       - {run: "echo after"}
   win: {runs-on: windows-latest, steps: [{run: "echo never"}]}
   call: {uses: ./.github/workflows/inner.yml}
+  slow: {runs-on: ubuntu-latest, steps: [{run: "sleep 120"}]}
