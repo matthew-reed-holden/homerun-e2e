@@ -1,0 +1,4 @@
+name: Inner
+on: workflow_call
+jobs:
+  in: {runs-on: macos-latest, steps: [{run: "echo never"}]}

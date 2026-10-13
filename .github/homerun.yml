@@ -1,0 +1,4 @@
+host_jobs: [host]
+secrets: [E2E]
+checks:
+  shellcheck: "true"

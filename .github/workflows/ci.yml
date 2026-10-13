@@ -1,0 +1,20 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  pass: {runs-on: ubuntu-latest, steps: [{run: "echo ok"}]}
+  fail: {runs-on: ubuntu-latest, steps: [{run: "echo bad; exit 1"}]}
+  matrix:
+    runs-on: ubuntu-latest
+    strategy: {matrix: {n: [1, 2]}}
+    steps: [{run: "echo leg ${{ matrix.n }}"}]
+  host:
+    runs-on: ubuntu-latest
+    steps: [{run: "test ! -f /.dockerenv && echo on-host"}]
+  secret: {runs-on: ubuntu-latest, steps: [{run: "echo ${{ secrets.E2E }}"}]}
+  soft:
+    runs-on: ubuntu-latest
+    steps:
+      - {run: "exit 1", continue-on-error: true}
+      - {run: "echo after"}
+  win: {runs-on: windows-latest, steps: [{run: "echo never"}]}
+  call: {uses: ./.github/workflows/inner.yml}
